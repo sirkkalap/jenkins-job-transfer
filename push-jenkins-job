@@ -5,7 +5,7 @@ USER=xxxxxxxx
 API_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 JENKINS_BASE=http://$USER:$API_TOKEN@xxxjenkins-serverxxx:8080
 
-JOB_CONFIG=$(echo ${1} | awk '/^[a-zA-Z0-9._%]+$/')
+JOB_CONFIG=$(echo ${1} | awk '/^[a-zA-Z0-9._\-%]+$/')
 JOB_CONFIG=${JOB_CONFIG:?"Usage: $0 <job-name.config>"}
 
 job=${JOB_CONFIG%.*}
