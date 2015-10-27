@@ -1,9 +1,6 @@
 #!/bin/bash
 
-USER=xxxxxxxx
-# Get api token from http://<jenkins-server>/user/<username>/configure
-API_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-JENKINS_BASE=http://xxxjenkins-serverxxx:8080
+source ${1:-inventory}
 
 JOB_LIST_URL=$JENKINS_BASE/api/json?pretty=true
 for job in $(wget --quiet -O - $JOB_LIST_URL | grep -o 'http://.*/job/[^"]*' | cut -d / -f 5)

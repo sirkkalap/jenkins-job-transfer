@@ -1,0 +1,4 @@
+USER=xxxxxxxx
+# Get api token from http://<jenkins-server>/user/<username>/configure
+API_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+JENKINS_BASE=http://xxxjenkins-serverxxx:8080

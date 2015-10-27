@@ -1,9 +1,6 @@
 #!/bin/bash
 
-USER=xxxxxxxx
-# Get api token from http://<jenkins-server>/user/<username>/configure
-API_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-JENKINS_BASE=http://$USER:$API_TOKEN@xxxjenkins-serverxxx:8080
+source ${1:-inventory}
 
 JOB_CONFIG=$(echo ${1} | awk '/^[a-zA-Z0-9._\-%]+$/')
 JOB_CONFIG=${JOB_CONFIG:?"Usage: $0 <job-name.config>"}
