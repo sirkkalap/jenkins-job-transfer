@@ -3,18 +3,18 @@ Simple Bash scripts to push and pull Jenkins job configs
 
 ## Usage
 
-Edit push and pull scripts and add required credentials to them.
+Edit inventory-file and add required credentials to them.
 
 Pull all jobs from Jenkins server.
 
 ```bash
-    pull-jenkins-jobs
+    pull-jenkins-jobs inventory-file
 ```
 
 Push one job back to Jenkins server.
 
 ```bash
-    push-jenkins-job job-filename
+    push-jenkins-job inventory-file job-filename
 ```
 
 ## Details
