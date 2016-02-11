@@ -1,11 +1,19 @@
 #!/bin/bash
 
-source ${1:-inventory}
+source ${2:-inventory}
 
 JOB_CONFIG=$(echo ${1} | awk '/^[a-zA-Z0-9._\-%]+$/')
-JOB_CONFIG=${JOB_CONFIG:?"Usage: $0 <job-name.config>"}
+JOB_CONFIG=${JOB_CONFIG:?"Usage: $0 <job-name.config> [<inventory>]"}
 
 job=${JOB_CONFIG%.*}
 url=$JENKINS_BASE/job/$job/config.xml
+check_url=$JENKINS_BASE/checkJobName?value=$job
+create_url=$JENKINS_BASE/createItem?name=$job
+wget_opts="--auth-no-challenge --no-check-certificate --http-user=$USER --http-password=$API_TOKEN"
 
-wget -O /dev/null --post-file=${JOB_CONFIG} --auth-no-challenge $url
+exists=$(wget -O - $wget_opts "$check_url" | grep -o exists)
+if [ -z "$exists" ]; then
+    wget -O /dev/null --post-file="${JOB_CONFIG}" --header "Content-Type:text/xml" $wget_opts "$create_url"
+else
+    wget -O /dev/null --post-file="${JOB_CONFIG}" --header "Content-Type:text/xml" $wget_opts "$url"
+fi
