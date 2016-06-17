@@ -10,7 +10,7 @@ url=$JENKINS_BASE/job/$job/config.xml
 check_url=$JENKINS_BASE/checkJobName?value=$job
 create_url=$JENKINS_BASE/createItem?name=$job
 wget_opts="--auth-no-challenge --no-check-certificate --http-user=$USER --http-password=$API_TOKEN"
-crumb=$(wget $wget_opts --output-document - "$JENKINS_URL/crumbIssuer/api/json" | sed -n -e 's/.*"crumb":"\([[:alnum:]]\+\)".*/\1/p' )
+crumb=$(wget $wget_opts --output-document - "$JENKINS_BASE/crumbIssuer/api/json" | sed -n -e 's/.*"crumb":"\([[:alnum:]]\+\)".*/\1/p' )
 
 exists=$(wget -O - $wget_opts "$check_url" | grep -o exists)
 if [ -z "$exists" ]; then
